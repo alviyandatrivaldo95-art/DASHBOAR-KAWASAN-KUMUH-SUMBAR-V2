@@ -1045,14 +1045,14 @@ function hitungDataDashboard(dataTerpilih, konfigurasi) {
 const WARNA_PIE = [
   "#f47b42",
   "#ef5350",
-  "#d9d84a",
-  "#62b447",
-  "#a8ad3f",
+  "#8db2e1",
+  "#60a5fa",
+  "#7da7cf",
   "#3b82f6",
   "#8b5cf6",
   "#0891b2",
   "#db2777",
-  "#65a30d"
+  "#2563eb"
 ];
 
 function buatElemenGrafikKosong(container, pesan = "Tidak ada data") {
@@ -1814,7 +1814,7 @@ function buatGrafikKombinasi(
     `${tinggiPlot}px`;
 
   /*
-   * BAR HIJAU dibuat terlebih dahulu.
+  * BAR BIRU dibuat terlebih dahulu.
    */
   dataKawasan.forEach(data => {
     const itemBar = document.createElement("div");
@@ -1849,7 +1849,7 @@ function buatGrafikKombinasi(
 
     /*
     * Urutan wajib:
-    * 1. Bar hijau
+    * 1. Bar biru
     * 2. Nilai angka bar
     * 3. Nama kawasan
     */

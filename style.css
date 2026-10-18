@@ -1,8 +1,8 @@
 :root {
-  --hijau-tua: #315d1b;
-  --hijau: #4d8529;
-  --hijau-terang: #8ed548;
-  --hijau-muda: #c6e8b3;
+  --biru-tua: #1d4f91;
+  --biru: #2767b2;
+  --biru-terang: #62a8f5;
+  --biru-muda: #c3dcf5;
   --abu: #a9a9a9;
 }
 
@@ -16,7 +16,7 @@
 html, body {
   width: 100%;
   height: 100%;
-  background: #77ad55;
+  background: #6a9ed8;
   color: white;
 }
 
@@ -31,7 +31,7 @@ body {
   display: flex;
   align-items: center;
   gap: 15px;
-  background: #2d4a1a;
+  background: #173b68;
   flex-shrink: 0;
   width: 100%;
   height: 114.3px;
@@ -74,7 +74,7 @@ body {
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  background: var(--hijau);
+  background: var(--biru);
   border: 3px solid #111;
   border-radius: 12px;
   flex-wrap: nowrap;
@@ -110,7 +110,7 @@ body {
   padding: 12px 20px;
   border: 3px solid #111;
   border-radius: 12px;
-  background: var(--hijau);
+  background: var(--biru);
   box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.35);
   position: absolute;
   right: 4px;
@@ -191,7 +191,7 @@ body {
   padding-bottom: 8px;
   font-size: 11px;
   font-weight: 800;
-  border-bottom: 2px solid #6ba546;
+  border-bottom: 2px solid #4284c5;
   color: #333;
   text-align: center;
   width: 100%;
@@ -202,7 +202,7 @@ body {
   padding: 8px 10px;
   font-size: 12px;
   font-weight: 700;
-  border: 2px solid #6ba546;
+  border: 2px solid #4284c5;
   border-radius: 6px;
   background: #fff;
   color: #333;
@@ -211,14 +211,14 @@ body {
 }
 
 .pilih-kabkota:hover {
-  background: #e8f5e9;
-  border-color: #4d8529;
+  background: #e8f1fb;
+  border-color: #2767b2;
 }
 
 .pilih-kabkota:focus {
   outline: none;
-  border-color: #4d8529;
-  box-shadow: 0 0 5px rgba(77, 133, 41, 0.5);
+  border-color: #2767b2;
+  box-shadow: 0 0 5px rgba(39, 103, 178, 0.5);
 }
 
 .home {
@@ -228,7 +228,8 @@ body {
   width: 50px;
   height: 50px;
   margin: 0 auto;
-  color: #5d9b2d;
+  color: #3979be;
+  filter: hue-rotate(90deg);
   font-size: 36px;
   transition: transform 0.3s ease;
   cursor: pointer;
@@ -243,13 +244,13 @@ body {
 }
 
 .home.active {
-  filter: brightness(1.25) drop-shadow(0 0 6px rgba(255,255,255,0.8));
+  filter: hue-rotate(90deg) brightness(1.25) drop-shadow(0 0 6px rgba(255,255,255,0.8));
   transform: scale(1.12);
 }
 
 
 .home.active {
-  filter: brightness(1.25) drop-shadow(0 0 5px #ffffff);
+  filter: hue-rotate(90deg) brightness(1.25) drop-shadow(0 0 5px #ffffff);
   transform: scale(1.15);
 }
 
@@ -295,7 +296,7 @@ body {
 }
 
 .menu-item:hover {
-  background: linear-gradient(180deg, #99d755, #629e32, #457924);
+  background: linear-gradient(180deg, #72b7ff, #347bc4, #22548c);
   transform: translateY(-2px);
   box-shadow: inset 2px 2px 3px #fff, inset -2px -2px 3px #222, 0 4px 8px rgba(0, 0, 0, 0.3);
 }
@@ -309,11 +310,11 @@ body {
 .menu-item.active {
   background: linear-gradient(
     180deg,
-    #99d755,
-    #629e32,
-    #457924
+    #72b7ff,
+    #347bc4,
+    #22548c
   );
-  border-color: #315d1b;
+  border-color: #1d4f91;
   box-shadow:
     inset 2px 2px 3px #ffffff,
     inset -2px -2px 3px #222222,
@@ -325,9 +326,9 @@ body {
 .menu-item.active:hover {
   background: linear-gradient(
     180deg,
-    #a8e968,
-    #6fab3b,
-    #4d8529
+    #91c7ff,
+    #478bd2,
+    #2767b2
   );
 }
 
@@ -364,7 +365,7 @@ body {
 .info-box {
   border: 3px solid #111;
   border-radius: 16px;
-  background: var(--hijau);
+  background: var(--biru);
   box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.35);
   padding: 10px;
   height: 71.8%;
@@ -409,7 +410,7 @@ body {
 .kawasan-card {
   border: 3px solid #111;
   border-radius: 16px;
-  background: var(--hijau);
+  background: var(--biru);
   box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.35);
   padding: 5px 10px;
   height: 24%;
@@ -452,7 +453,7 @@ body {
   padding: 4px;
   text-align: center;
   border-radius: 16px;
-  background: var(--hijau);
+  background: var(--biru);
   box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.35);
   border: 3px solid #111;
   text-shadow: 2px 3px 3px #222;
@@ -461,7 +462,7 @@ body {
 }
 
 .rendah {
-  color: #a6ffe1;
+  color: #a6e3ff;
   align-content: start;
   font-size: 15px;
   font-weight: bold;
@@ -497,7 +498,7 @@ body {
 
 .info-box h3 {
   font-size: 14px;
-  color: #a6ffe1;
+  color: #a6e3ff;
   margin-bottom: 6px;
   font-weight: 800;
   text-shadow: 2px 3px 3px #222;
@@ -526,7 +527,7 @@ body {
   min-height: 0;
   padding: 60px 15px 15px;
   overflow-y: auto;
-  background: var(--hijau-muda);
+  background: var(--biru-muda);
   border-radius: 22px;
 }
 
@@ -536,7 +537,7 @@ body {
   min-height: 350px;
   padding: 50px 8px 8px;
   background: #ffffff;
-  border: 3px solid #629e32;
+  border: 3px solid #347bc4;
   border-radius: 16px;
   box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.3);
 }
@@ -561,8 +562,8 @@ body {
   min-height: 48px;
   place-items: center;
   padding: 6px 10px;
-  background: linear-gradient(135deg, #9be657, #75bd38, #9ae65b);
-  border: 2px solid #39771a;
+  background: linear-gradient(135deg, #8bc4ff, #5b9de5, #82bcff);
+  border: 2px solid #245c9c;
   border-radius: 28px;
   box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.3);
   color: #ffffff;
@@ -599,7 +600,7 @@ body {
 
 .nilai {
   margin-bottom: 5px;
-  color: #214719;
+  color: #164678;
   font-size: 9px;
   font-weight: 800;
   line-height: 1;
@@ -610,16 +611,16 @@ body {
   width: 32px;
   height: var(--bar-height, 0px);
   min-height: 2px;
-  background: linear-gradient(180deg, #19712f, #77e993);
-  border-right: 1px solid #376b40;
-  border-left: 1px solid #376b40;
+  background: linear-gradient(180deg, #1456a0, #78c5ff);
+  border-right: 1px solid #245b91;
+  border-left: 1px solid #245b91;
   border-radius: 3px 3px 0 0;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.35);
   transition: height 0.3s ease, transform 0.2s ease, filter 0.2s ease;
 }
 
 .bar:hover {
-  background: linear-gradient(180deg, #0d5a22, #9cff7f);
+  background: linear-gradient(180deg, #10457f, #b0ddff);
   transform: scaleX(1.12);
   filter: brightness(1.08);
 }
@@ -695,7 +696,7 @@ body {
     filter 0.2s ease;
 }
 
-/* Urutan pertama: bar hijau */
+/* Urutan pertama: bar biru */
 .combo-bar-item .combo-bar {
   order: 1;
 }
@@ -715,7 +716,7 @@ body {
   display: block;
   flex: 0 0 auto;
   margin-top: 3px; /* sebelumnya 5px */
-  color: #214719;
+  color: #164678;
   font-size: 8px;
   font-weight: 800;
   line-height: 1;
@@ -734,8 +735,8 @@ body {
   flex: 0 0 auto;
   background: linear-gradient(
     180deg,
-    #37974f,
-    #43e663
+    #287ac2,
+    #5bb5ff
   );
   border-radius: 4px 4px 0 0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
@@ -878,7 +879,7 @@ body {
 }
 
 .combo-marker-bar {
-  background: #3ca45d;
+  background: #3586cf;
 }
 
 .combo-marker-orange {
@@ -1032,12 +1033,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #6ba546;
+  background: #4284c5;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #4d8529;
+  background: #2767b2;
 }
 
 @media (max-width: 1600px) {
@@ -1110,15 +1111,15 @@ body {
 }
 
 .combo-scroll::-webkit-scrollbar-track {
-  background: rgba(49, 93, 27, 0.12);
+  background: rgba(29, 79, 145, 0.12);
   border-radius: 10px;
 }
 
 .combo-scroll::-webkit-scrollbar-thumb {
   background: linear-gradient(
     90deg,
-    #4d8529,
-    #8ed548
+    #2767b2,
+    #62a8f5
   );
   border-radius: 10px;
 }
@@ -1137,7 +1138,7 @@ body {
     );
 }
 
-/* Efek dasar bar hijau */
+/* Efek dasar bar biru */
 .combo-bar {
   position: relative;
   z-index: 2;
@@ -1187,7 +1188,7 @@ body {
   transform: scaleX(1.12);
   filter: brightness(1.15) saturate(1.15);
   box-shadow:
-    0 0 6px rgba(71, 181, 98, 0.75),
+    0 0 6px rgba(71, 143, 220, 0.75),
     0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -1205,20 +1206,20 @@ body {
 }
 
 .combo-bar-item:hover .combo-bar-value {
-  color: #17652e;
+  color: #15549a;
   font-size: 9px;
   text-shadow:
-    0 0 4px rgba(104, 210, 123, 0.8),
+    0 0 4px rgba(104, 174, 242, 0.8),
     1px 1px 0 #ffffff;
   transform: translateX(-50%) translateY(-3px);
 }
 
 .combo-bar-item:hover .combo-label {
-  color: #17652e;
+  color: #15549a;
   font-weight: 800;
   transform: scale(1.08);
   text-shadow:
-    0 0 4px rgba(104, 210, 123, 0.8),
+    0 0 4px rgba(104, 174, 242, 0.8),
     1px 1px 0 #ffffff;
 }
 
@@ -1237,9 +1238,9 @@ body {
   min-width: 170px;
   max-width: 240px;
   padding: 9px 11px;
-  border: 2px solid #315d1b;
+  border: 2px solid #1d4f91;
   border-radius: 8px;
-  background: rgba(35, 75, 24, 0.96);
+  background: rgba(24, 58, 98, 0.96);
   color: #fff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
   font-size: 10px;
@@ -1255,7 +1256,7 @@ body {
 }
 
 .combo-tooltip-title {
-  color: #c6e8b3;
+  color: #c3dcf5;
   font-size: 11px;
   font-weight: 800;
 }
@@ -1267,7 +1268,7 @@ body {
 }
 
 .combo-tooltip-label {
-  color: #d9f7c7;
+  color: #d7eaff;
   font-weight: 700;
 }
 
@@ -1328,10 +1329,10 @@ body {
   gap: 5px;
 
   padding: 9px 11px;
-  border: 2px solid #315d1b;
+  border: 2px solid #1d4f91;
   border-radius: 8px;
 
-  background: rgba(35, 75, 24, 0.96);
+  background: rgba(24, 58, 98, 0.96);
   color: #ffffff;
 
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
@@ -1352,7 +1353,7 @@ body {
 }
 
 .pie-tooltip-title {
-  color: #c6e8b3;
+  color: #c3dcf5;
   font-size: 11px;
   font-weight: 800;
 }
@@ -1364,7 +1365,7 @@ body {
 }
 
 .pie-tooltip-label {
-  color: #d9f7c7;
+  color: #d7eaff;
   font-weight: 700;
 }
 
@@ -1409,10 +1410,10 @@ body {
   gap: 5px;
 
   padding: 9px 11px;
-  border: 2px solid #315d1b;
+  border: 2px solid #1d4f91;
   border-radius: 8px;
 
-  background: rgba(35, 75, 24, 0.96);
+  background: rgba(24, 58, 98, 0.96);
   color: #ffffff;
 
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
@@ -1432,7 +1433,7 @@ body {
 }
 
 .bar-tooltip-title {
-  color: #c6e8b3;
+  color: #c3dcf5;
   font-size: 11px;
   font-weight: 800;
 }
@@ -1444,7 +1445,7 @@ body {
 }
 
 .bar-tooltip-label {
-  color: #d9f7c7;
+  color: #d7eaff;
   font-weight: 700;
 }
 
@@ -1472,13 +1473,13 @@ body {
 .bar-item:hover .bar {
   filter: brightness(1.18) saturate(1.15);
   box-shadow:
-    0 0 7px rgba(71, 181, 98, 0.8),
+    0 0 7px rgba(71, 143, 220, 0.8),
     0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .bar-item:hover .nilai,
 .bar-item:hover .label {
-  color: #17652e;
+  color: #15549a;
   font-weight: 800;
 }
 
