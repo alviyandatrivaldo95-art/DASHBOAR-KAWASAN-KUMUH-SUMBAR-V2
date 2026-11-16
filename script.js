@@ -1,3 +1,4 @@
+// STATUS PEMBACA CSV
 console.log("Status PapaParse:", {
   tersedia: typeof Papa !== "undefined",
   dapatParse:
@@ -5,6 +6,7 @@ console.log("Status PapaParse:", {
     typeof Papa.parse === "function"
 });
 
+// VALIDASI KOLOM SPREADSHEET
 function cekKolomKategori(
   konfigurasi,
   namaKategori
@@ -68,68 +70,71 @@ function cekKolomKategori(
   );
 }
 
+// SUMBER DATA DAN HEADER SPREADSHEET
 const SPREADSHEET_ID =
-  "12ZEtHw6czHD00zI9ynjkiK0Ws3s70Z22iB97Z6YEkrw";
+  "1BBOptQXdVIFhiy_rmmL4wTOqxRNdDYDo";
 
-const SHEET_GID = "1694018568";
+const SHEET_GID = "224527192"; // Tab PERHITUNGAN KUMUH
+const CSV_HEADER_ROW_INDEX = 3;
 
 const SHEET_CSV_URL =
   `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/export` +
   `?format=csv&gid=${SHEET_GID}`;
 
+// Nilai header dicocokkan dengan kode pada baris ke-4.
 const HEADER_SPREADSHEET = {
-  NAMA_KAB_KOTA: "Nama Kab/Kota",
-  NAMA_KAWASAN: "Nama Kawasan/Lokasi",
-  KATEGORI: "Kategori",
+  NAMA_KAB_KOTA: "5",
+  NAMA_KAWASAN: "10",
+  KATEGORI: "pre_hsl_tk_kumuh",
 
-  JUMLAH_TOTAL_KK_STAT_ROW: "Jml Total KK",
-  JUMLAH_TOTAL_KK_CHART: "Jml Total KK",
-  LUAS_PERMUKIMAN_KUMUH: "Luas Permukiman Kumuh",
+  JUMLAH_TOTAL_KK_STAT_ROW: "15",
+  JUMLAH_TOTAL_KK_CHART: "15",
+  LUAS_PERMUKIMAN_KUMUH: "12",
 
-  JUMLAH_TOTAL_BANGUNAN: "Jml Total Bangunan",
-  BANGUNAN_TIDAK_TERATUR: "Jml Bangunan tidak memiliki keteraturan",
+  JUMLAH_TOTAL_BANGUNAN: "13",
+  BANGUNAN_TIDAK_TERATUR: "pre_k1_a_p",
   BANGUNAN_TIDAK_MEMENUHI_TEKNIS:
-    "Jml Bangunan tidak memenuhi persyaratan Teknis",
+    "pre_k1_c_p",
 
   PANJANG_JALAN_LINGKUNGAN:
-    "Panjang Jalan Lingkungan (m)",
+    "16",
   PANJANG_JALAN_RUSAK:
-    "Panjang Jalan Lingkungan dengan kondisi Rusak (m)",
+    "18",
   PANJANG_JALAN_EKSISTING:
-    "Panjang Jalan Lingkungan eksisting (m)",
+    "17",
 
   JUMLAH_KK_TIDAK_TERAKSES_AIR_MINUM_AMAN:
-    "Jumlah KK tidak terakses air minum aman",
+    "pre_k3_a_s",
   JUMLAH_KK_TIDAK_TERPENUHI_AIR_MINUM:
-    "Jumlah KK tidak terpenuhi Air Minum",
+    "pre_k3_b_s",
   PERSENTASE_TIDAK_TERAKSES_AIR_MINUM_AMAN:
-    "Jumlah KK tidak terakses air minum aman Persentase",
+    "pre_k3_a_p",
   PERSENTASE_TIDAK_TERPENUHI_AIR_MINUM:
-    "Jumlah KK tidak terpenuhi Air Minum Persentase",
+    "pre_k3_b_p",
 
   PANJANG_DRAINASE_IDEAL:
-    "Panjang Drainase Lingkungan Ideal (m)",
+    "20",
   PANJANG_DRAINASE_RUSAK:
-    "Panjang Drainase Lingkungan dengan kondisi Rusak (m)",
+    "22",
   PANJANG_DRAINASE_EKSISTING:
-    "Panjang Drainase Lingkungan Eksisting (m)",
+    "21",
   LUAS_TERKENA_GENANGAN:
-    "Luas Kawasan Terkena Genangan",
+    "19",
 
   JUMLAH_KK_TIDAK_TERAKSES_AIR_LIMBAH:
-    "Jumlah KK tidak terakses sistem air limbah sesuai standar teknis",
+    "pre_k5_a_s",
   JUMLAH_KK_AIR_LIMBAH_TIDAK_SESUAI:
-    "Jumlah KK dengan sarpras air limbah tdk sesuai persyaratan teknis",
+    "pre_k5_b_s",
 
   JUMLAH_KK_SISTEM_SAMPAH_TIDAK_SESUAI:
-    "Jumlah KK dengan sarpras pengolahan sampah yang tdk sesuai persyaratan teknis",
+    "pre_k6_a_s",
   JUMLAH_KK_SARPRAS_SAMPAH_TIDAK_SESUAI:
-    "Jumlah KK dg sistem pengolahan sampah tdk sesuai standar teknis",
+    "pre_k6_b_s",
 
   JUMLAH_BANGUNAN_TIDAK_TERLAYANI_PRASARANA:
-    "Jumlah bangunan tidak terlayani prasarana proteksi kebakaran",
+    "pre_k7_a_s",
   JUMLAH_BANGUNAN_TIDAK_TERLAYANI_SARANA:
-    "Jumlah bangunan tidak terlayani sarana proteksi kebakaran"
+    "pre_k7_b_s"
 };
 
 const STAT_ROW_COLUMN =
@@ -145,7 +150,9 @@ let dataInitialized = false;
 let pilihKabKotaListenerSetup = false;
 const chartAktif = {};
 
+// MENU DASHBOARD DAN JUDUL GRAFIK
 const KATEGORI_DASHBOARD = {
+  // KAWASAN KUMUH
   kumuh: {
     chart1Column: HEADER_SPREADSHEET.JUMLAH_TOTAL_KK_CHART,
     chart2Column: HEADER_SPREADSHEET.LUAS_PERMUKIMAN_KUMUH,
@@ -158,6 +165,7 @@ const KATEGORI_DASHBOARD = {
     chart3Label: "LUASAN KAWASAN KUMUH SEDANG (Ha)"
   },
 
+  // KETERATURAN BANGUNAN
   "keteraturan-bangunan": {
     chart1Column: HEADER_SPREADSHEET.JUMLAH_TOTAL_BANGUNAN,
     chart2Column: HEADER_SPREADSHEET.BANGUNAN_TIDAK_TERATUR,
@@ -170,6 +178,7 @@ const KATEGORI_DASHBOARD = {
     chart3Label: "BANGUNAN TIDAK SESUAI TEKNIS"
   },
 
+  // JALAN LINGKUNGAN
   "jalan-lingkungan": {
     chart1Column: HEADER_SPREADSHEET.PANJANG_JALAN_LINGKUNGAN,
     chart2Column: HEADER_SPREADSHEET.PANJANG_JALAN_RUSAK,
@@ -188,11 +197,12 @@ const KATEGORI_DASHBOARD = {
     chart1Type: "bar",
     chart2Type: "bar",
     chart3Type: "pie",
-    chart1Label: "PANJANG JALAN LINGKUNGAN (m)",
-    chart2Label: "JALAN LINGKUNGAN DENGAN KONDISI RUSAK (m)",
+    chart1Label: "PANJANG JALAN LINGKUNGAN IDEAL (m)",
+    chart2Label: "PANJANG JALAN LINGKUNGAN RUSAK (m)",
     chart3Label: "PERSENTASE JALAN LINGKUNGAN DENGAN KONDISI RUSAK (%)"
   },
 
+  // AIR MINUM
   "air-minum": {
     chart1Column: HEADER_SPREADSHEET.JUMLAH_KK_TIDAK_TERAKSES_AIR_MINUM_AMAN,
     chart2Column: HEADER_SPREADSHEET.PERSENTASE_TIDAK_TERAKSES_AIR_MINUM_AMAN,
@@ -205,6 +215,7 @@ const KATEGORI_DASHBOARD = {
     chart3Label: "PERSENTASE KK TIDAK TERPENUHI AIR MINUM"
   },
 
+  // DRAINASE LINGKUNGAN
   drainase: {
     chart1Column:
       HEADER_SPREADSHEET.PANJANG_DRAINASE_RUSAK,
@@ -232,6 +243,7 @@ const KATEGORI_DASHBOARD = {
       "PERSENTASE PANJANG DRAINASE RUSAK (%)"
   },
 
+  // AIR LIMBAH/SANITASI
   "air-limbah": {
     chart1Column: HEADER_SPREADSHEET.JUMLAH_KK_TIDAK_TERAKSES_AIR_LIMBAH,
     chart2Column: HEADER_SPREADSHEET.JUMLAH_KK_TIDAK_TERAKSES_AIR_LIMBAH,
@@ -244,6 +256,7 @@ const KATEGORI_DASHBOARD = {
     chart3Label: "KK DENGAN SARPRAS AIR LIMBAH TIDAK SESUAI"
   },
 
+  // PENGELOLAAN PERSAMPAHAN
   persampahan: {
     chart1Column: HEADER_SPREADSHEET.JUMLAH_KK_SISTEM_SAMPAH_TIDAK_SESUAI,
     chart2Column: HEADER_SPREADSHEET.JUMLAH_KK_SARPRAS_SAMPAH_TIDAK_SESUAI,
@@ -256,6 +269,7 @@ const KATEGORI_DASHBOARD = {
     chart3Label: "KK DENGAN SISTEM SAMPAH TIDAK SESUAI"
   },
 
+  // PROTEKSI KEBAKARAN
   "proteksi-kebakaran": {
     chart1Column: HEADER_SPREADSHEET.JUMLAH_BANGUNAN_TIDAK_TERLAYANI_PRASARANA,
     chart2Column: HEADER_SPREADSHEET.JUMLAH_BANGUNAN_TIDAK_TERLAYANI_PRASARANA,
@@ -269,6 +283,7 @@ const KATEGORI_DASHBOARD = {
   }
 };
 
+// JUDUL DAN DATA GRAFIK KOMBINASI
 const KONFIGURASI_GRAFIK_KOMBINASI = {
   "air-minum": {
     bar: HEADER_SPREADSHEET.JUMLAH_TOTAL_KK_STAT_ROW,
@@ -339,6 +354,7 @@ const KONFIGURASI_GRAFIK_KOMBINASI = {
   }
 };
 
+// NORMALISASI HEADER DAN FORMAT NILAI
 function normalisasiHeader(namaHeader) {
   return String(namaHeader || "")
     .replace(/^\uFEFF/, "")
@@ -589,6 +605,34 @@ function tampilkanContohData() {
   });
 }
 
+// PEMBACAAN SPREADSHEET CSV DENGAN HEADER BARIS KE-4
+function konversiCSVKeData(semuaBaris) {
+  const header = semuaBaris[CSV_HEADER_ROW_INDEX];
+
+  if (!header) {
+    return [];
+  }
+
+  const namaHeader = header.map(normalisasiHeader);
+
+  return semuaBaris
+    .slice(CSV_HEADER_ROW_INDEX + 1)
+    .filter(baris =>
+      baris.some(nilai => String(nilai || "").trim() !== "")
+    )
+    .map(baris => {
+      const dataBaris = {};
+
+      namaHeader.forEach((namaKolom, index) => {
+        if (namaKolom) {
+          dataBaris[namaKolom] = String(baris[index] || "").trim();
+        }
+      });
+
+      return dataBaris;
+    });
+}
+
 function parseCSV(csvText) {
   if (
     typeof Papa !== "undefined" &&
@@ -596,18 +640,16 @@ function parseCSV(csvText) {
   ) {
     console.log("✅ CSV dibaca menggunakan PapaParse");
 
-    return Papa.parse(csvText, {
-      header: true,
-      skipEmptyLines: true,
+    const hasilParse = Papa.parse(csvText, {
+      header: false,
+      skipEmptyLines: false,
       dynamicTyping: false,
-      transformHeader: function (header) {
-        return String(header || "")
-          .replace(/^\uFEFF/, "")
-          .replace(/\u00A0/g, " ")
-          .replace(/\s+/g, " ")
-          .trim();
-      }
     });
+
+    return {
+      data: konversiCSVKeData(hasilParse.data),
+      errors: hasilParse.errors
+    };
   }
 
   console.warn("⚠️ PapaParse tidak tersedia. Menggunakan parser cadangan.");
@@ -648,9 +690,7 @@ function parseCSVManual(csvText) {
       baris.push(nilai);
       nilai = "";
 
-      if (baris.some(item => String(item).trim() !== "")) {
-        semuaBaris.push(baris);
-      }
+      semuaBaris.push(baris);
 
       baris = [];
       continue;
@@ -662,37 +702,16 @@ function parseCSVManual(csvText) {
   if (nilai !== "" || baris.length > 0) {
     baris.push(nilai);
 
-    if (baris.some(item => String(item).trim() !== "")) {
-      semuaBaris.push(baris);
-    }
+    semuaBaris.push(baris);
   }
 
-  if (semuaBaris.length === 0) {
-    return { data: [], errors: [] };
-  }
-
-  const header = semuaBaris[0].map(namaHeader =>
-    String(namaHeader || "")
-      .replace(/^\uFEFF/, "")
-      .replace(/\u00A0/g, " ")
-      .replace(/\s+/g, " ")
-      .trim()
-  );
-
-  const data = semuaBaris.slice(1).map(barisData => {
-    const dataObjek = {};
-
-    header.forEach((namaHeader, index) => {
-      dataObjek[namaHeader] =
-        barisData[index] !== undefined ? String(barisData[index]).trim() : "";
-    });
-
-    return dataObjek;
-  });
-
-  return { data, errors: [] };
+  return {
+    data: konversiCSVKeData(semuaBaris),
+    errors: []
+  };
 }
 
+// MEMUAT DAN MEMPERBARUI DATA SPREADSHEET
 async function ambilDataSpreadsheet() {
   if (sedangMemuatData) {
     return;
@@ -774,6 +793,7 @@ async function ambilDataSpreadsheet() {
   }
 }
 
+// PILIH KAB/KOTA DAN FILTER DATA
 function isiPilihanKabKota() {
   const selectKabKota = document.getElementById("pilihKabKota");
 
@@ -834,6 +854,7 @@ function filterDataKabKota(namaKabKota) {
   });
 }
 
+// HITUNGAN DATA DAN RINGKASAN KAWASAN
 function hitungPersentaseKolom(
   dataBaris,
   kolomPembilang,
@@ -1042,6 +1063,7 @@ function hitungDataDashboard(dataTerpilih, konfigurasi) {
   };
 }
 
+// GRAFIK: PALET WARNA DAN KEADAAN KOSONG
 const WARNA_PIE = [
   "#f47b42",
   "#ef5350",
@@ -1084,6 +1106,7 @@ function formatAngkaDesimal(nilai) {
   });
 }
 
+// GRAFIK BATANG
 function buatGrafikBar(
   containerId,
   dataArray,
@@ -1348,6 +1371,7 @@ function buatGrafikBar(
   container.appendChild(bars);
 }
 
+// GRAFIK KOMBINASI: GARIS, NILAI, DAN TOOLTIP
 function buatGarisDOM(
   plot,
   bars,
@@ -2100,6 +2124,7 @@ window.addEventListener(
   { passive: true }
 );
 
+// GRAFIK PIE DAN LEGENDA
 function buatGrafikPie(containerId, dataArray, labels, judul) {
   const container = bersihkanContainerGrafik(containerId);
 
@@ -2441,6 +2466,7 @@ function formatNilaiPie(nilai, judul = "") {
   return `${hasil}%`;
 }
 
+// PILIH JENIS GRAFIK DAN PERBARUI JUDUL
 function renderChart(containerId, tipeChart, dataArray, labels, judul) {
   if (tipeChart === "pie") {
     buatGrafikPie(containerId, dataArray, labels, judul);
@@ -2472,6 +2498,7 @@ function updateJudulGrafik(konfigurasi) {
     konfigurasi.chart3Label;
 }
 
+// INFORMASI KAB/KOTA DAN KATEGORI KAWASAN
 function hitungInformasiKabKota(dataTerpilih) {
   let totalKK = 0;
   let jumlahRingan = 0;
@@ -2558,6 +2585,7 @@ function updateInformasiKabKota(informasiKabKota) {
   }
 }
 
+// TAMPILKAN DASHBOARD DAN PERBARUI KARTU
 function tampilkanDashboard(
   namaKabKota = currentKabupaten,
   namaKategori = currentCategory,
@@ -2674,6 +2702,7 @@ function tampilkanDashboard(
   );
 }
 
+// NAVIGASI SIDEBAR DAN PILIHAN KATEGORI
 function pasangEventMenu() {
   const daftarMenu = document.querySelectorAll(".menu-item");
   const tombolHome = document.getElementById("homeBtn");
@@ -2723,6 +2752,7 @@ function pasangEventMenu() {
   }
 }
 
+// PESAN ERROR DASHBOARD
 function tampilkanError(pesanError) {
   const elemenContent = document.querySelector(".content");
 
@@ -2732,6 +2762,7 @@ function tampilkanError(pesanError) {
   }
 }
 
+// INISIALISASI DAN PEMBARUAN OTOMATIS DASHBOARD
 function mulaiDashboard() {
   console.log("✅ Dashboard dimulai");
 
