@@ -74,7 +74,7 @@ function cekKolomKategori(
 const SPREADSHEET_ID =
   "1BBOptQXdVIFhiy_rmmL4wTOqxRNdDYDo";
 
-const SHEET_GID = "224527192"; // Tab PERHITUNGAN KUMUH
+const SHEET_GID = "1144857719"; // Tab PERHITUNGAN KUMUH
 const CSV_HEADER_ROW_INDEX = 3;
 
 const SHEET_CSV_URL =
@@ -125,16 +125,26 @@ const HEADER_SPREADSHEET = {
     "pre_k5_a_s",
   JUMLAH_KK_AIR_LIMBAH_TIDAK_SESUAI:
     "pre_k5_b_s",
+  PERSENTASE_KK_AIR_LIMBAH_TIDAK_SESUAI:
+    "pre_k5_b_p",
 
   JUMLAH_KK_SISTEM_SAMPAH_TIDAK_SESUAI:
     "pre_k6_a_s",
   JUMLAH_KK_SARPRAS_SAMPAH_TIDAK_SESUAI:
     "pre_k6_b_s",
+  PERSENTASE_KK_SARPRAS_SAMPAH_TIDAK_SESUAI:
+    "pre_k6_a_p",
+  PERSENTASE_KK_SISTEM_SAMPAH_TIDAK_SESUAI:
+    "pre_k6_b_p",
 
   JUMLAH_BANGUNAN_TIDAK_TERLAYANI_PRASARANA:
     "pre_k7_a_s",
   JUMLAH_BANGUNAN_TIDAK_TERLAYANI_SARANA:
-    "pre_k7_b_s"
+    "pre_k7_b_s",
+  PERSENTASE_BANGUNAN_TIDAK_TERLAYANI_PRASARANA:
+    "pre_k7_a_p",
+  PERSENTASE_BANGUNAN_TIDAK_TERLAYANI_SARANA:
+    "pre_k7_b_p"
 };
 
 const STAT_ROW_COLUMN =
@@ -247,7 +257,7 @@ const KATEGORI_DASHBOARD = {
   "air-limbah": {
     chart1Column: HEADER_SPREADSHEET.JUMLAH_KK_TIDAK_TERAKSES_AIR_LIMBAH,
     chart2Column: HEADER_SPREADSHEET.JUMLAH_KK_TIDAK_TERAKSES_AIR_LIMBAH,
-    chart3Column: HEADER_SPREADSHEET.JUMLAH_KK_AIR_LIMBAH_TIDAK_SESUAI,
+    chart3Column: HEADER_SPREADSHEET.PERSENTASE_KK_AIR_LIMBAH_TIDAK_SESUAI,
     chart1Type: "bar",
     chart2Type: "bar",
     chart3Type: "pie",
@@ -259,8 +269,8 @@ const KATEGORI_DASHBOARD = {
   // PENGELOLAAN PERSAMPAHAN
   persampahan: {
     chart1Column: HEADER_SPREADSHEET.JUMLAH_KK_SISTEM_SAMPAH_TIDAK_SESUAI,
-    chart2Column: HEADER_SPREADSHEET.JUMLAH_KK_SARPRAS_SAMPAH_TIDAK_SESUAI,
-    chart3Column: HEADER_SPREADSHEET.JUMLAH_KK_SISTEM_SAMPAH_TIDAK_SESUAI,
+    chart2Column: HEADER_SPREADSHEET.PERSENTASE_KK_SARPRAS_SAMPAH_TIDAK_SESUAI,
+    chart3Column: HEADER_SPREADSHEET.PERSENTASE_KK_SISTEM_SAMPAH_TIDAK_SESUAI,
     chart1Type: "bar",
     chart2Type: "pie",
     chart3Type: "pie",
@@ -272,8 +282,8 @@ const KATEGORI_DASHBOARD = {
   // PROTEKSI KEBAKARAN
   "proteksi-kebakaran": {
     chart1Column: HEADER_SPREADSHEET.JUMLAH_BANGUNAN_TIDAK_TERLAYANI_PRASARANA,
-    chart2Column: HEADER_SPREADSHEET.JUMLAH_BANGUNAN_TIDAK_TERLAYANI_PRASARANA,
-    chart3Column: HEADER_SPREADSHEET.JUMLAH_BANGUNAN_TIDAK_TERLAYANI_SARANA,
+    chart2Column: HEADER_SPREADSHEET.PERSENTASE_BANGUNAN_TIDAK_TERLAYANI_PRASARANA,
+    chart3Column: HEADER_SPREADSHEET.PERSENTASE_BANGUNAN_TIDAK_TERLAYANI_SARANA,
     chart1Type: "bar",
     chart2Type: "pie",
     chart3Type: "pie",
@@ -309,9 +319,9 @@ const KONFIGURASI_GRAFIK_KOMBINASI = {
 
 
     labels: [
-      "PANJANG DRAINASE IDEAL (m)",
-      "PANJANG DRAINASE RUSAK (m)",
-      "PANAJNG DRAINASE EKSISTING (m)"
+      "Panjang Drainase Ideal (m)",
+      "Panjang Drainase Rusak (m)",
+      "Panjang Drainase Eksisting (m)"
     ],
 
     title: "DRAINASE LINGKUNGAN"
@@ -945,11 +955,14 @@ function hitungDataDashboard(dataTerpilih, konfigurasi) {
       return;
     }
 
-    jumlahKawasan++;
+    const kategori = normalisasiKategori(nilaiKategori);
+
+    if (!kategori.includes("tidak kumuh")) {
+      jumlahKawasan++;
+    }
+
     dataChartKK.push(nilaiChartKK);
     labelChartKK.push(namaKawasan);
-
-    const kategori = normalisasiKategori(nilaiKategori);
 
     const nilaiChart2Spreadsheet = ambilNilaiSpreadsheet(
       dataBaris,
@@ -1413,7 +1426,7 @@ function buatGarisDOM(
    * Tinggi grafik aktual berdasarkan ukuran DOM,
    * bukan angka tetap dari CSS.
    */
-  const tinggiAktual = plot.clientHeight;
+  const tinggiAktual = Math.max(0, baseline - 12);
 
   const daftarGaris = [
     {
@@ -1797,6 +1810,7 @@ function buatGrafikKombinasi(
   );
 
   const tinggiPlot = 185;
+  const tinggiDataMaksimum = tinggiPlot - 60;
   const lebarPerKawasan = 92;
   const paddingGrafik = 8;
 
@@ -1855,7 +1869,7 @@ function buatGrafikKombinasi(
 
     const tinggiBar =
       data.bar > 0
-        ? (data.bar / nilaiMaksimum) * tinggiPlot
+        ? (data.bar / nilaiMaksimum) * tinggiDataMaksimum
         : 0;
 
     bar.style.height =
@@ -2255,6 +2269,19 @@ function buatGrafikPie(containerId, dataArray, labels, judul) {
   function buatPathPie(sudutMulai, sudutAkhir) {
     const titikMulai = titikLingkaran(sudutMulai);
     const titikAkhir = titikLingkaran(sudutAkhir);
+
+    if (sudutAkhir - sudutMulai >= 360) {
+      const titikBerlawanan =
+        titikLingkaran(sudutMulai + 180);
+
+      return [
+        `M ${pusat} ${pusat}`,
+        `L ${titikMulai.x} ${titikMulai.y}`,
+        `A ${radius} ${radius} 0 1 1 ${titikBerlawanan.x} ${titikBerlawanan.y}`,
+        `A ${radius} ${radius} 0 1 1 ${titikMulai.x} ${titikMulai.y}`,
+        "Z"
+      ].join(" ");
+    }
 
     const besarBusur =
       sudutAkhir - sudutMulai > 180 ? 1 : 0;
@@ -2703,6 +2730,28 @@ function tampilkanDashboard(
 }
 
 // NAVIGASI SIDEBAR DAN PILIHAN KATEGORI
+let transisiChartTimer = null;
+
+function animasikanPerubahanChart() {
+  const areaGrafik = document.querySelector(".chart-area");
+
+  if (
+    !areaGrafik ||
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
+    return;
+  }
+
+  clearTimeout(transisiChartTimer);
+  areaGrafik.classList.remove("category-transition");
+  void areaGrafik.offsetWidth;
+  areaGrafik.classList.add("category-transition");
+
+  transisiChartTimer = setTimeout(() => {
+    areaGrafik.classList.remove("category-transition");
+  }, 700);
+}
+
 function pasangEventMenu() {
   const daftarMenu = document.querySelectorAll(".menu-item");
   const tombolHome = document.getElementById("homeBtn");
@@ -2726,6 +2775,7 @@ function pasangEventMenu() {
           kategori,
           false
         );
+        animasikanPerubahanChart();
       }
     });
   });
@@ -2745,11 +2795,66 @@ function pasangEventMenu() {
         "kumuh",
         false
       );
+      animasikanPerubahanChart();
     });
 
     // Home aktif ketika dashboard pertama kali dibuka
     tombolHome.classList.add("active");
   }
+}
+
+function pasangToggleSidebar() {
+  const tombolToggle =
+    document.getElementById("sidebarToggle");
+  const shortcutLokasi =
+    document.getElementById("locationShortcut");
+  const pilihKabKota =
+    document.getElementById("pilihKabKota");
+  const ikonToggle =
+    tombolToggle?.querySelector("i");
+
+  if (!tombolToggle || !ikonToggle) {
+    return;
+  }
+
+  function aturSidebar(diciutkan) {
+    document.body.classList.toggle(
+      "sidebar-collapsed",
+      diciutkan
+    );
+
+    tombolToggle.setAttribute(
+      "aria-expanded",
+      String(!diciutkan)
+    );
+
+    tombolToggle.setAttribute(
+      "aria-label",
+      diciutkan ? "Perlebar sidebar" : "Kecilkan sidebar"
+    );
+
+    tombolToggle.title =
+      diciutkan ? "Perlebar sidebar" : "Kecilkan sidebar";
+
+    ikonToggle.className = diciutkan
+      ? "fa-solid fa-angles-right"
+      : "fa-solid fa-angles-left";
+  }
+
+  aturSidebar(
+    document.body.classList.contains("sidebar-collapsed")
+  );
+
+  tombolToggle.addEventListener("click", () => {
+    aturSidebar(
+      !document.body.classList.contains("sidebar-collapsed")
+    );
+  });
+
+  shortcutLokasi?.addEventListener("click", () => {
+    aturSidebar(false);
+    pilihKabKota?.focus();
+  });
 }
 
 // PESAN ERROR DASHBOARD
@@ -2766,6 +2871,7 @@ function tampilkanError(pesanError) {
 function mulaiDashboard() {
   console.log("✅ Dashboard dimulai");
 
+  pasangToggleSidebar();
   ambilDataSpreadsheet();
 
   if (timerPembaruan) {
