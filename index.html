@@ -17,7 +17,7 @@
   <!-- Custom CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="sidebar-collapsed">
 
   <!-- HEADER INSTANSI -->
   <header class="header-instansi">
@@ -45,22 +45,47 @@
   </header>
 
         <main class="layout">
-          <aside class="sidebar">
-            <div class="sidebar-title">PILIH KAB/KOTA</div>
-            <select id="pilihKabKota" class="pilih-kabkota">
-              <option value="">⏳ Memuat data...</option>
-            </select>
+          <aside class="sidebar" id="sidebar">
+            <div class="sidebar-heading">
+              <div class="sidebar-title">PILIH KAB/KOTA</div>
+              <button
+                class="sidebar-toggle"
+                id="sidebarToggle"
+                type="button"
+                aria-label="Perlebar sidebar"
+                aria-expanded="false"
+                aria-controls="sidebar"
+                title="Perlebar sidebar"
+              >
+                <i class="fa-solid fa-angles-right" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="location-control">
+              <button
+                class="location-shortcut"
+                id="locationShortcut"
+                type="button"
+                aria-label="Pilih kabupaten/kota"
+                title="Pilih kabupaten/kota"
+              >
+                <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+              </button>
+              <select id="pilihKabKota" class="pilih-kabkota" aria-label="Pilih kabupaten/kota">
+                <option value="">⏳ Memuat data...</option>
+              </select>
+            </div>
             
             <ul class="menu">
             <img src="assets/logo home.svg" alt="Home" class="home" id="homeBtn">
-              <li><a href="#" class="menu-item" data-category="keteraturan-bangunan">KETERATURAN<br>BANGUNAN</a></li>
-              <li><a href="#" class="menu-item" data-category="jalan-lingkungan">JALAN LINGKUNGAN</a></li>
-              <li><a href="#" class="menu-item" data-category="air-minum">AIR MINUM</a></li>
-              <li><a href="#" class="menu-item" data-category="drainase">DRAINASE LINGKUNGAN</a></li>
-              <li><a href="#" class="menu-item" data-category="air-limbah">AIR LIMBAH/SANITASI</a></li>
-              <li><a href="#" class="menu-item" data-category="persampahan">PENGELOLAAN<br>PERSAMPAHAN</a></li>
-              <li><a href="#" class="menu-item" data-category="proteksi-kebakaran">PROTEKSI KEBAKARAN</a></li>
+              <li><a href="#" class="menu-item" data-category="keteraturan-bangunan" aria-label="Keteraturan Bangunan" title="Keteraturan Bangunan"><i class="menu-icon fa-solid fa-building" aria-hidden="true"></i><span class="menu-label">KETERATURAN<br>BANGUNAN</span></a></li>
+              <li><a href="#" class="menu-item" data-category="jalan-lingkungan" aria-label="Jalan Lingkungan" title="Jalan Lingkungan"><i class="menu-icon fa-solid fa-road" aria-hidden="true"></i><span class="menu-label">JALAN LINGKUNGAN</span></a></li>
+              <li><a href="#" class="menu-item" data-category="air-minum" aria-label="Air Minum" title="Air Minum"><i class="menu-icon fa-solid fa-droplet" aria-hidden="true"></i><span class="menu-label">AIR MINUM</span></a></li>
+              <li><a href="#" class="menu-item" data-category="drainase" aria-label="Drainase Lingkungan" title="Drainase Lingkungan"><i class="menu-icon fa-solid fa-water" aria-hidden="true"></i><span class="menu-label">DRAINASE LINGKUNGAN</span></a></li>
+              <li><a href="#" class="menu-item" data-category="air-limbah" aria-label="Air Limbah dan Sanitasi" title="Air Limbah/Sanitasi"><i class="menu-icon fa-solid fa-toilet" aria-hidden="true"></i><span class="menu-label">AIR LIMBAH/SANITASI</span></a></li>
+              <li><a href="#" class="menu-item" data-category="persampahan" aria-label="Pengelolaan Persampahan" title="Pengelolaan Persampahan"><i class="menu-icon fa-solid fa-trash" aria-hidden="true"></i><span class="menu-label">PENGELOLAAN<br>PERSAMPAHAN</span></a></li>
+              <li><a href="#" class="menu-item" data-category="proteksi-kebakaran" aria-label="Proteksi Kebakaran" title="Proteksi Kebakaran"><i class="menu-icon fa-solid fa-fire-extinguisher" aria-hidden="true"></i><span class="menu-label">PROTEKSI KEBAKARAN</span></a></li>
             </ul>
+            <div class="main-watermark">2026 © Trivaldo Alviyanda</div>
           </aside>
           <!-- informasi kumuh  -->
           <!-- Jumlah KK -->
@@ -129,7 +154,6 @@
             </div>
           </section>
           </section>
-          <div class="main-watermark">2026 © Trivaldo Alviyanda</div>
         </main>
 
   <!-- Custom JavaScript -->
